@@ -146,9 +146,27 @@ class IntentClassifier:
         }
 
 
+def predict_intent(text: str) -> list[dict]:
+    """
+    Wrapper function to provide a standardized interface for Naive Bayes classification.
+    
+    Returns:
+        List containing a single dictionary: [{"intent": "...", "confidence": float}]
+    """
+    classifier = IntentClassifier()
+    result = classifier.classify(text, verbose=False)
+    
+    return [
+        {
+            "intent": result["intent"],
+            "confidence": round(result["confidence"], 4)
+        }
+    ]
+
+
 # ----------------------------
 # Standalone Test
 # ----------------------------
 if __name__ == "__main__":
-    classifier = IntentClassifier()
-    classifier.classify("schedule meeting tomorrow")
+    # Test individual classification
+    print(predict_intent("schedule meeting tomorrow"))

@@ -74,6 +74,13 @@ def transcribe_from_mic(duration: int = 5) -> str:
         return error_msg
 
 
+def transcribe() -> str:
+    """
+    Standard entry point for ASR. Defaults to transcribing from the microphone.
+    """
+    return transcribe_from_mic()
+
+
 if __name__ == "__main__":
     # Test mic recording
     transcribe_from_mic(5)
